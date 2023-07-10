@@ -3,7 +3,20 @@ const mongoose = require("mongoose");
 
 const users = new mongoose.Schema({
     joined_at: { type: Date, default: Date.now },
-    email: { type: String, minLength: 5, maxLength: 50, required: true, unique: true },
+    email: { 
+        type: String, 
+        minLength: 5, 
+        maxLength: 50, 
+        required: true, 
+        unique: true,
+        validate: {
+            validator: function (value) {
+              // Custom validation to check the email format using regular expression
+              return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+            },
+            message: 'Invalid email format.'
+        }
+    },
     firtname: { type: String, minLength: 2, maxLength: 50, required: true },
     lastname: { type: String, minLength: 2, maxLength: 50, required: true },
     phonenumber: { type: String, minLength: 7, maxLength: 24, required: true },
