@@ -37,7 +37,7 @@ const agents = new mongoose.Schema({
 });
 
 agents.methods.generateAuthToken = function(){
-    return jwt.sign({ _id: this._id, }, process.env.JWT_PRIVATE_KEY);
+    return jwt.sign({ _id: this._id, is_agent: true }, process.env.JWT_PRIVATE_KEY);
 }
 
 const Agents = mongoose.model("Agent", agents);
