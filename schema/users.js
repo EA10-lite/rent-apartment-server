@@ -14,12 +14,12 @@ const email = Joi.string().email({ tlds: { allow: false } }).required().messages
   'string.email': 'Invalid email format.'
 });
 
-const login = {
+const login_schema = {
     email,
     password
 };
 
-const register = {
+const register_schema = {
     email,
     firstname: Joi.string().min(2).max(50).required(),
     lasstname: Joi.string().min(2).max(50).required(),
@@ -31,11 +31,11 @@ const register = {
     })
 }
 
-const forgot_password = {
+const forgot_password_schema = {
     email
 }
 
-const reset_password = {
+const reset_password_schema = {
     password,
     confirm_password: Joi.string().valid(Joi.ref('password')).required().messages({
       'any.only': 'Passwords do not match.',
@@ -44,8 +44,8 @@ const reset_password = {
 }
 
 module.exports = {
-    forgot_password,
-    login,
-    register,
-    reset_password,
+    forgot_password_schema,
+    login_schema,
+    register_schema,
+    reset_password_schema,
 }
